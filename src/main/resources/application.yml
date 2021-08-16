@@ -1,0 +1,9 @@
+logging:
+  config:
+    classpath:log4j2-spring.xml
+
+
+spring:
+  http:
+    encoding:
+      force: true

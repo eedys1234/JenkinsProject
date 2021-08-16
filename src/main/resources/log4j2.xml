@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" monitorInterval="30">
+    <Properties>
+        <Property name="pattern">%d{HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} [%-40.40C{40}:%4L][%t] | %m%n</Property>
+    </Properties>
+    <Appenders>
+        <!-- console -->
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} [%-40.40C{40}:%4L] | %msg%n" />
+        </Console>
+        <!-- rollingFile -->
+        <RollingFile name = "rollingFile" fileName="./logs/aiops-server.log" append="true" filePattern="./logs/backup/%d{yyyy-MM-dd}_%i.log" ignoreExceptions="false">
+            <PatternLayout charset="UTF-8" pattern="${pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.jenkins" level="info" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="rollingFile" />
+        </Logger>
+        <Logger name="org.apache.http" level="info" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="com.zaxxer.hikari.pool.HikariPool" level="info" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="org.apache.kafka" level="info" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="org.mybatis.spring" level="info" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Root level="info" additivity="false">
+            <AppenderRef ref="rollingFile" />
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
