@@ -6,7 +6,7 @@ VOLUME /tmp
 
 EXPOSE 8080
 
-ARG JAR_FILE=target/JenkinsProject-1.0-SNAPSHOT.jar
+ARG JAR_FILE=target/*.jar
 
 ADD ${JAR_FILE} JenkinsProject.jar
 
